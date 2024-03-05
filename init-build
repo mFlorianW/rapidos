@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ ! -d build/conf ];then
+    mkdir -p build/conf
+fi
+
+if [ ! -f build/conf/bblayers.conf ]; then
+    cp conf/bblayers.conf build/conf
+fi
+
+if [ ! -f build/conf/local.conf ]; then
+    cp conf/local.conf build/conf
+fi
+
+. layer/poky/oe-init-build-env build
