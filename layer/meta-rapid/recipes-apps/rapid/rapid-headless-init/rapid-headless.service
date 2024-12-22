@@ -1,0 +1,11 @@
+[Unit]
+Description=Rapid Headless Timer Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/rapid_headless -g -f /usr/share/rapid/laps/Oschersleben.csv
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
