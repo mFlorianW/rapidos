@@ -19,3 +19,26 @@ docker run -it --rm -v {$PWD}:/home/builder/rapidos -w /home/builder/rapidos rap
 ```
 
 ### Building Image
+#### Init Build for default machine
+```bash
+./init-build
+```
+
+#### Init Build for specific machine
+```bash
+./init-build  -m <machine>
+```
+
+Supported Machines:
+* pi02w
+* pi3
+
+#### Build Production Image
+```bash
+bitbake rapid-image
+```
+
+#### Build Develop Image
+```bash
+bitbake rapid-develop-image
+```
