@@ -1,0 +1,13 @@
+[Unit]
+Description=Rapid WIFI Hotspot Service
+After=connman.service wpa_supplicant.service
+
+[Service]
+Type=simple
+ExecStartPre=/usr/bin/connmanctl enable wifi
+ExecStart=/usr/bin/start-wifi-hotspot.sh
+ExecStop=/usr/bin/connmanctl tether wifi off
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target

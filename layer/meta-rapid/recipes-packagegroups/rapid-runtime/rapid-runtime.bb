@@ -6,4 +6,7 @@ inherit packagegroup
 
 RDEPENDS:${PN} = "  \
     rapid-headless-init \
+    connman \
+    connman-client \
+    wifi-hotspot \
 "
