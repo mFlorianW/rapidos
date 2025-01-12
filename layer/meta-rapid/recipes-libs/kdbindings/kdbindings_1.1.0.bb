@@ -9,4 +9,3 @@ S = "${WORKDIR}/git"
 inherit cmake
 
 EXTRA_OECMAKE = ""
-
