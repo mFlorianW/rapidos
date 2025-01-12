@@ -13,6 +13,7 @@ DEPENDS += " \
     boost \
     spdlog \
     nlohmann-json \
+    comms-ublox \
 "
 
 EXTRA_OECMAKE += " -DENABLE_QT=OFF  -DENABLE_BOOST=ON"
