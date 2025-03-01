@@ -5,5 +5,6 @@ SUMMARY = "This package group adds various packages to an image to run the rapid
 inherit packagegroup
 
 RDEPENDS:${PN} = "  \
+    lsof \
     rapid-headless-init \
 "
