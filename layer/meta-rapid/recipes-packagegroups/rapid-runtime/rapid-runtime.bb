@@ -6,5 +6,6 @@ inherit packagegroup
 
 RDEPENDS:${PN} = "  \
     lsof \
+    picocom \
     rapid-headless-init \
 "
