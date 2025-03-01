@@ -1,2 +1,115 @@
 #!/bin/bash
-. layer/poky/oe-init-build-env build
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+
+echo "Setting up the Yocto build environment..."
+
+# Ensure the script is sourced
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo "Please source this script: . ./init-build-env"
+    exit 1
+fi
+
+MACHINE="raspberrypi0-2w-64"
+OEROOT=${SCRIPT_DIR}/layer/poky
+BUILDROOT="${SCRIPT_DIR}/build"
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+key="$1"
+
+case $key in 
+    -b|--build-dir)
+        buildroot=${2}
+        if [ -z ${buildroot} ];then
+            echo "Option -b,--build-dir set without value "
+            return -1
+        fi
+        BUILDROOT=$(readlink -f ${buildroot})
+        shift
+        ;;
+    -c|--clean)
+        if [ ! -z "${BUILDROOT}/conf" ];then
+            echo "Clean configuration in ${BUILDROOT}/conf"
+            rm -rf "${BUILDROOT}/conf"
+        fi
+        shift
+        ;;
+    -m|--machine)
+        machine=${2}
+        if [ -z ${MACHINE} ];then
+            ehco "Option -m,--machine set without value"
+            return -1
+        fi
+        case $machine in
+            pi02w)
+                MACHINE="raspberrypi0-2w-64"
+                ;;
+            pi3)
+                MACHINE="raspberrypi3-64"
+                ;;
+            *)
+                echo "Unsupported machine ${machine}"
+                return -1
+                ;;
+        esac
+        shift
+        ;;
+    -h|--help)
+        echo "Usage: . init-build [OPTION...]"
+        echo ""
+        echo " -c, --clean       : cleans build configuration in <BUILDROOT>/conf, must be set as the first parameter"
+        eczo " -m, --machine     : sets the machine, default pi02w, Supported pi02w|pi3"
+        echo " -h, --help        : shows this help dialog"
+        return 0;
+        shift
+        ;;
+    *)
+        POSITIONAL+=("${1}")
+        shift
+        ;;
+esac
+done
+
+set -- "${POSITIONAL[@]}"
+
+
+# Setup build dir
+if [ ! -d "${BUILDROOT}" ];then
+    echo "Create Build directory ${BUILDROOT}/conf"
+    mkdir -p "${BUILDROOT}"
+fi
+
+if [ ! -d "${BUILDROOT}/conf" ];then
+    echo "Create Build configuration directory ${BUILDROOT}/conf"
+    mkdir -p "${BUILDROOT}/conf"
+fi
+
+echo "Setup build configuration"
+if [ ! -f "${BUILDROOT}/conf/local.conf" ];then
+    cp conf/local.conf "${BUILDROOT}/conf"
+else
+    echo "lcoal.conf exists"
+fi
+
+if [ ! -f "${BUILDROOT}/conf/bblayers.conf" ];then
+    cp conf/bblayers.conf "${BUILDROOT}/conf"
+else
+    echo "bblayers.conf exists"
+fi
+
+echo "Configure Build for machine: ${MACHINE}"
+sed -i "s/MACHINE = \"\"/MACHINE = \"${MACHINE}\"/g" ${BUILDROOT}/conf/local.conf
+
+echo "Sourcing environment..."
+source ${OEROOT}/oe-init-build-env "${BUILDROOT}" > /dev/null
+
+cat <<EOF
+The build environment is configured with:
+
+MACHINE=${MACHINE}
+
+Build images with:
+    bitbake rapid-image
+    bitbake rapid-develop-image
+EOF

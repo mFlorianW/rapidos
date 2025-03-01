@@ -21,14 +21,12 @@ docker run -it --rm -v {$PWD}:/home/builder/rapidos -w /home/builder/rapidos rap
 ### Building Image
 #### Init Build for default machine
 ```bash
-./setup-build
 . init-build
 ```
 
 #### Init Build for specific machine
 ```bash
-./setup-build  -m <machine>
-. init-build
+. init-build -m pi3
 ```
 
 Supported Machines:
