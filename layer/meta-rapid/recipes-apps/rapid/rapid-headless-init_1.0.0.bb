@@ -13,5 +13,5 @@ FILES:${PN} += "${systemd_unitdir}/system/rapid-headless.service"
 
 do_install() {
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/rapid-headless.service ${D}${systemd_unitdir}/system/
+    install -m 0644 ${UNPACKDIR}/rapid-headless.service ${D}${systemd_unitdir}/system/
 }
