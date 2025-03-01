@@ -8,4 +8,5 @@ RDEPENDS:${PN} = "  \
     lsof \
     picocom \
     rapid-headless-init \
+    hostapd \
 "
