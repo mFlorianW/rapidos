@@ -3,7 +3,7 @@ Description=Rapid Headless Timer Service
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/rapid_headless -s /dev/ttyUSB0
+ExecStart=/usr/bin/rapid_headless -s /dev/ttyS0
 Restart=always
 RestartSec=5
 
