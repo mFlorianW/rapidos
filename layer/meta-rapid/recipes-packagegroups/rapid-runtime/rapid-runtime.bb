@@ -9,4 +9,5 @@ RDEPENDS:${PN} = "  \
     picocom \
     rapid-headless-init \
     hostapd \
+    dnsmasq \
 "
