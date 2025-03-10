@@ -7,7 +7,7 @@ PV = "0.1.0+git${SRCREV}"
 
 S = "${WORKDIR}/git"
 
-inherit cmake
+inherit cmake pkgconfig
 
 DEPENDS += " \
     kdbindings \
