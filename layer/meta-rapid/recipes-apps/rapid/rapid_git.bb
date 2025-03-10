@@ -15,6 +15,7 @@ DEPENDS += " \
     spdlog \
     nlohmann-json \
     comms-ublox \
+    gpsd \
 "
 
 EXTRA_OECMAKE += " -DENABLE_QT=OFF  -DENABLE_BOOST=ON"

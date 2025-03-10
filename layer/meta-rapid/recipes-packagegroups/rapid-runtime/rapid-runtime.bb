@@ -10,4 +10,6 @@ RDEPENDS:${PN} = "  \
     rapid-headless-init \
     hostapd \
     dnsmasq \
+    gpsd \
+    gps-utils \
 "
