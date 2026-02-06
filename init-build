@@ -59,7 +59,7 @@ case $key in
         echo "Usage: . init-build [OPTION...]"
         echo ""
         echo " -c, --clean       : cleans build configuration in <BUILDROOT>/conf, must be set as the first parameter"
-        eczo " -m, --machine     : sets the machine, default pi02w, Supported pi02w|pi3"
+        echo " -m, --machine     : sets the machine, default pi02w, Supported pi02w|pi3"
         echo " -h, --help        : shows this help dialog"
         return 0;
         shift
