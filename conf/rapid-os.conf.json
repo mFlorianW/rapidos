@@ -1,0 +1,97 @@
+{
+    "description": "Rapid OS - The Linux distro for rapid laptimer (https://github.com/mFlorianW/rapid-android)",
+    "expires": "2026-05-31",
+    "version": "1.0",
+    "sources": {
+        "bitbake": {
+            "git-remote": {
+                "remotes": {
+                    "origin": {
+                        "uri": "https://github.com/openembedded/bitbake.git"
+                    }
+                },
+                "branch": "2.16",
+                "rev": "663021740bc086bd959a8457ad9ddb6da52a8278"
+            }
+        },
+        "openembedded-core": {
+            "git-remote": {
+                "remotes": {
+                    "origin": {
+                        "uri": "https://github.com/mFlorianW/openembedded-core.git"
+                    }
+                },
+                "branch": "fwe/template_conf_issue",
+                "rev": "fwe/template_conf_issue"
+            }
+        },
+        "meta-yocto": {
+            "git-remote": {
+                "remotes": {
+                    "origin": {
+                        "uri": "https://git.yoctoproject.org/meta-yocto"
+                    }
+                },
+                "branch": "whinlatter",
+                "rev": "whinlatter"
+            }
+        },
+        "meta-raspberrypi": {
+            "git-remote": {
+                "remotes": {
+                    "origin": {
+                        "uri": "https://github.com/agherzan/meta-raspberrypi.git"
+                    }
+                },
+                "branch": "master",
+                "rev": "cc665244bc804a773c6603a6dc7d55f3bfb8b05d"
+            }
+        },
+        "meta-oe": {
+            "git-remote": {
+                "remotes": {
+                    "origin": {
+                        "uri": "https://git.openembedded.org/meta-openembedded"
+                    }
+                },
+                "branch": "whinlatter",
+                "rev": "whinlatter"
+            }
+        },
+        "meta-rapid": {
+            "git-remote": {
+                "remotes": {
+                    "origin": {
+                        "uri": "https://github.com/mFlorianW/meta-rapid.git"
+                    }
+                },
+                "branch": "main",
+                "rev": "main"
+            }
+        }
+    },
+    "bitbake-setup": {
+        "configurations": [
+        {
+            "setup-dir-name": "$distro-$machine",
+            "oe-template": "rapid-default",
+            "oe-fragments-one-of": {
+                "machine": {
+                    "description": "Target machines",
+                    "options" : ["machine/raspberrypi0-2w", "machine/raspberrypi3-64"]
+                },
+                "distro": {
+                    "description": "Target Distributions",
+                    "options" : ["distro/rapid-os"]
+                }
+            },
+            "configurations": [
+            {
+                "name": "rapid-os",
+                "description": "Rapid OS - The configuration for the Raspberry PI based laptimer"
+            }
+            ]
+        }
+        ]
+    }
+}

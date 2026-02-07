@@ -1,6 +1,13 @@
 # RapidOs
 
 ## Building
+
+1. Setup docker environment
+2. Build docker image
+3. Start docker container
+4. Setup build environment
+5. Build image
+
 ### Docker
 #### Build
 ```bash
@@ -19,19 +26,18 @@ docker run -it --rm -v {$PWD}:/home/builder/rapidos -w /home/builder/rapidos rap
 ```
 
 ### Building Image
-#### Init Build for default machine
+
+#### Setup Build for default machine
+Call bitbake-setup with config file and follow the instructions.
+This only needs to be done once, after that you can just init the build environment and start building images.
 ```bash
-. init-build
+bitbake/bin/bitbake-setup init ./conf/rapid-os.conf.json
 ```
 
-#### Init Build for specific machine
+#### Init build environement
 ```bash
-. init-build -m pi3
+. bitbake-builds/rapid-os-raspberrypi0-2w/build/init-build-env
 ```
-
-Supported Machines:
-* pi02w
-* pi3
 
 #### Build Production Image
 ```bash
@@ -41,4 +47,10 @@ bitbake rapid-image
 #### Build Develop Image
 ```bash
 bitbake rapid-develop-image
+```
+
+### Updating Build Environment
+If you need to update the build environment, for example to get the latest yocto changes, you can run the following command:
+```bash
+bitbake/bin/bitbake-setup update --setup-dir bitbake-builds/rapid-os-<machine>
 ```

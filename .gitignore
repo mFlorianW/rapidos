@@ -12,3 +12,6 @@ javascripts/bundles
 stylesheets/bundles
 
 build
+
+bitbake-cookerdaemon.log
+bitbake-builds
